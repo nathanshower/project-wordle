@@ -1,29 +1,19 @@
 import React from 'react';
 
-import { range } from '../../utils';
-import { NUM_OF_GUESSES_ALLOWED } from '../../constants';
+import Guess from '../Guess';
 
 function GuessList({ guessList }) {
 
   return (
-    <>
+    <ul className="guess-list">
       {
-        range(NUM_OF_GUESSES_ALLOWED).map( (index) => {
-          
+        guessList.map( (data, row) => {
+          const thisGuess = data;
+          console.log( thisGuess );
+          return <Guess guess={thisGuess} key={row}/>
         })
       }
-      <ul className="guess-list">
-        {guessList.map(
-          ({word, id}) => {
-            return (
-              <li className="guess" key={id} data-key={id}>
-                {word}
-              </li>
-            );
-          }
-        )}
-      </ul>
-    </>
+    </ul>
   );
 }
 

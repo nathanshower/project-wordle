@@ -8,6 +8,7 @@ function Input({ handleNewGuess }) {
 
     const newGuess = {
       word: input,
+      status: 'guessed',
       id: crypto.randomUUID(),
     };
     handleNewGuess(newGuess);
