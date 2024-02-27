@@ -17,9 +17,9 @@ console.info({ answer });
 function Game() {
 
   /**
-   * The results from a single guess. If all correct, you win.
+   * The result from a single guess. If all correct, you win.
    */
-  const [result, setResult] = React.useState('guessing');
+  const [gameStatus, setGameStatus] = React.useState('guessing');
 
   /**
    * The current guess.
@@ -52,12 +52,12 @@ function Game() {
     nextGuessList[guessNumber] = newGuess;
     setGuessList( nextGuessList );
 
-    const nextResult = guessNumber === NUM_OF_GUESSES_ALLOWED
+    const nextGameStatus = guessNumber + 1 === NUM_OF_GUESSES_ALLOWED
       ? ( guessInput === answer ? 'win' : 'lose' )
       : guessInput === answer ? 'win' : 'guessing';
-    setResult( nextResult );
+    setGameStatus( nextGameStatus );
     
-    if ( 'guessing' === nextResult ) {
+    if ( guessNumber < NUM_OF_GUESSES_ALLOWED ) {
       setGuessNumber( guessNumber + 1 );
     }
   }
@@ -65,15 +65,15 @@ function Game() {
   return (
     <>
       <Banner
-        result={result}
-        answer={answer}
+        gameStatus={gameStatus}
         guessNumber={guessNumber}
+        answer={answer}
       />
       <GuessList
         guessList={guessList}
       />
       <Input
-        guessNumber={guessNumber}
+        gameStatus={gameStatus}
         handleNewGuess={handleNewGuess}
       />
     </>

@@ -1,24 +1,35 @@
 import React from 'react';
 
-function Banner({result, answer, guessNumber}) {
+function Banner({gameStatus, guessNumber, answer }) {
   
   const banner = {
-    status: 'playing',
+    status: 'guessing',
     message: '',
   };
   
-  if ( 'win' === result ) {
-    banner.message = <p><strong>Congratulations!</strong> You got it in {guessNumber} guess{guessNumber > 1 && 'es'}!</p>;
+  if ( 'win' === gameStatus ) {
     banner.status = 'happy';
-  } else if ( 'lose' === result ) {
-    banner.message = <p>The correct answer was <strong>{answer}</strong>.</p>;
+    banner.message = <p><strong>Congratulations!</strong> You got it in {guessNumber} guess{guessNumber > 1 && 'es'}!</p>;
+  } else if ( 'lose' === gameStatus ) {
     banner.status = 'sad';
+    banner.message = <p>The correct answer was <strong>{answer}</strong>.</p>;
   }
 
   return (
-    <div className={`banner ${banner.status !== 'playing' && banner.status}`}>
-      {banner.message}
-    </div>
+    <>
+      {
+        banner.status !== 'guessing' && 
+        <div
+          key="result-banner"
+          className={`banner ${banner.status !== 'guessing' && banner.status}`}
+        >
+          {banner.message}
+          <button className="btn btn-restart">
+            Restart
+          </button>
+        </div>
+      }
+    </>
   );
 }
 

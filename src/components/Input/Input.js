@@ -1,6 +1,6 @@
 import React from 'react';
 
-function Input({ handleNewGuess }) {
+function Input({ gameStatus, handleNewGuess }) {
   
   const [input, setInput] = React.useState('');
 
@@ -21,6 +21,7 @@ function Input({ handleNewGuess }) {
         value={input}
         pattern="\w{5}"
         title="A guess is exactly 5 letters long."
+        disabled={gameStatus !== 'guessing' && true}
         onChange={
           (event) => {
             if (event.target.value.length > 5 ) {
