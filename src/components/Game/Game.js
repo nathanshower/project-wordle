@@ -18,7 +18,7 @@ function Game() {
   /**
    * The results from a single guess. If all correct, you win.
    */
-  const [result, setResult] = React.useState('');
+  const [result, setResult] = React.useState('guessing');
 
   /**
    * The current guess.
@@ -46,12 +46,25 @@ function Game() {
       status: 'guessed',
       id: crypto.randomUUID(),
     };
-    const nextGuessNumber = guessNumber;
 
     const nextGuessList = guessList;
-    nextGuessList[nextGuessNumber] = newGuess;
+    nextGuessList[guessNumber] = newGuess;
     setGuessList( nextGuessList );
-    setGuessNumber( nextGuessNumber + 1 );
+
+    if ( guessNumber === NUM_OF_GUESSES_ALLOWED ) {
+      setResult(
+        checkGuess( answer, answer ).toString() === checkGuess( guessInput, answer ).toString()
+        ? 'win'
+        : 'lose'
+      );
+    } else {
+      setResult(
+        checkGuess( answer, answer ).toString() === checkGuess( guessInput, answer ).toString()
+        ? 'win'
+        : 'guessing'
+      );
+      setGuessNumber( guessNumber + 1 );
+    }
   }
 
   return (

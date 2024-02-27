@@ -4,8 +4,6 @@ import { range } from '../../utils';
 
 function Guess({ guess }) {
 
-  console.log( guess );
-
   return (
     <li className="guess" data-key={guess.id} key={guess.id}>
       {
