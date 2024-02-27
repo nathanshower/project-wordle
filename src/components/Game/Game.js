@@ -31,14 +31,20 @@ function Game() {
     const nextGuessList = guessList;
     nextGuessList[nextGuessNumber] = newGuess;
     setGuessList( nextGuessList );
-
     setGuessNumber( nextGuessNumber + 1 );
   }
 
   return (
     <>
-      <GuessList guessNumber={guessNumber} guessList={guessList} />
-      <Input guessNumber={guessNumber} handleNewGuess={handleNewGuess} />
+      <GuessList
+        guessNumber={guessNumber}
+        guessList={guessList}
+        answer={answer}
+      />
+      <Input
+        guessNumber={guessNumber}
+        handleNewGuess={handleNewGuess}
+      />
     </>
   );
 }
