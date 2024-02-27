@@ -5,13 +5,7 @@ function Input({ handleNewGuess }) {
 
   function handleGuess(event) {
     event.preventDefault();
-
-    const newGuess = {
-      word: input,
-      status: 'guessed',
-      id: crypto.randomUUID(),
-    };
-    handleNewGuess(newGuess);
+    handleNewGuess(input);
     setInput('');
     document.getElementById('guess-input').focus();
   }

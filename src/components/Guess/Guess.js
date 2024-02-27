@@ -2,7 +2,9 @@ import React from 'react';
 
 import { range } from '../../utils';
 
-function Guess({ guess, guessResult }) {
+function Guess({ guess }) {
+
+  console.log( guess );
 
   return (
     <li className="guess" data-key={guess.id} key={guess.id}>
@@ -11,9 +13,9 @@ function Guess({ guess, guessResult }) {
           <span
             key={col}
             data-key={col}
-            className={`cell ${guessResult ? guessResult[col].status : ''}`}
+            className={`cell ${guess.result ? guess.result[col].status : ''}`}
           >
-            {guess.word.substring(col, col + 1)}
+            {guess.result ? guess.result[col].letter : ''}
           </span>
         ))
       }
