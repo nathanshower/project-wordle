@@ -5,6 +5,7 @@ import { checkGuess } from '../../game-helpers';
 import { WORDS } from '../../data';
 import { NUM_OF_GUESSES_ALLOWED } from '../../constants';
 
+import Banner from '../Banner';
 import GuessList from '../GuessList';
 import Input from '../Input';
 
@@ -51,24 +52,23 @@ function Game() {
     nextGuessList[guessNumber] = newGuess;
     setGuessList( nextGuessList );
 
-    if ( guessNumber === NUM_OF_GUESSES_ALLOWED ) {
-      setResult(
-        checkGuess( answer, answer ).toString() === checkGuess( guessInput, answer ).toString()
-        ? 'win'
-        : 'lose'
-      );
-    } else {
-      setResult(
-        checkGuess( answer, answer ).toString() === checkGuess( guessInput, answer ).toString()
-        ? 'win'
-        : 'guessing'
-      );
+    const nextResult = guessNumber === NUM_OF_GUESSES_ALLOWED
+      ? ( guessInput === answer ? 'win' : 'lose' )
+      : guessInput === answer ? 'win' : 'guessing';
+    setResult( nextResult );
+    
+    if ( 'guessing' === nextResult ) {
       setGuessNumber( guessNumber + 1 );
     }
   }
 
   return (
     <>
+      <Banner
+        result={result}
+        answer={answer}
+        guessNumber={guessNumber}
+      />
       <GuessList
         guessList={guessList}
       />
